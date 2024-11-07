@@ -7,20 +7,20 @@ initPrintOut(document.getElementById("txtOut"));
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
     
-// First line: Count from 1 to 10
+
 let line1 = "";
 for (let i = 1; i <= 10; i++) {
    line1 += i + " ";
 }
-printOut(line1.trim());  // Prints the line counting from 1 to 10
+printOut(line1.trim());  
 printOut(newLine);
     
-// Second line: Count from 10 to 1
+
 let line2 = "";
 for (let j = 10; j >= 1; j--) {
     line2 += j + " ";
 }
-printOut(line2.trim());  // Prints the line counting from 10 to 1
+printOut(line2.trim());  
 
 printOut(newLine);
 
@@ -29,47 +29,47 @@ printOut(newLine);
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
  
- // Set the target number that the computer is trying to guess
+ 
 const targetNumber = 45 ;
     
-// Variable to hold the computer's guess
+
  let guessedNumber = 0 ;
     
- // Use a "while" loop to keep guessing until the guess matches the target number
+ 
  while (guessedNumber !== targetNumber) {
-    // Generate a random number between 1 and 60
+    
     guessedNumber = Math.floor(Math.random() * 60) + 1 ;
  }
     
- // Print the correct guess once the loop has completed
+ 
  printOut("The computer guessed the correct number: " + guessedNumber) ;
 
  printOut("--- Part 3 ------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 
-// Set the target number for the second guessing game (between 1 and 1 million)
-const targetNumber2 = 999999;  // Example target number (1 million)
 
-// Variable to hold the computer's guess and the number of guesses
+const targetNumber2 = 999999;  
+
+
 let guessedNumber2 = 0;
 let guessCount2 = 0;
 
-// Record the start time for the second game
+
 const startTime = Date.now();
 
-// Use a "while" loop to keep guessing until the guess matches the target number
+
 while (guessedNumber2 !== targetNumber2) {
-    guessedNumber2 = Math.floor(Math.random() * 1000000) + 1;  // Guess a number between 1 and 1 million
-    guessCount2++;  // Increment the guess count with each iteration
+    guessedNumber2 = Math.floor(Math.random() * 1000000) + 1;  
+    guessCount2++;  
 }
 
-// Record the end time for the second game
+
 const endTime = Date.now();
 
-// Calculate the time it took to guess (in milliseconds)
+
 const elapsedTime = endTime - startTime;
 
-// Print results for Part 3
+
 printOut("The computer guessed the correct number: " + guessedNumber2);
 printOut("Number of guesses the computer used: " + guessCount2);
 printOut("Time taken (in milliseconds): " + elapsedTime);
@@ -79,28 +79,27 @@ printOut(newLine);
 
 
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
-/* Put your code below here!*/
+
 
 let result = " " ;   
 
-// Loop through numbers from 2 to 199
-for (let num = 2; num < 200; num++) {
-    let isPrime = true;  // Assume the number is prime unless proven otherwise
-    
 
-    // Check if num is divisible by any number between 2 and num-1
+for (let num = 2; num < 200; num++) {
+    let isPrime = true;  
+
+   
     let divisor = 2;
-    while (divisor <= Math.sqrt(num)) {  // We only need to check up to the square root of num
-        if (num % divisor === 0) {  // If num is divisible by divisor, it's not prime
+    while (divisor <= Math.sqrt(num)) { 
+        if (num % divisor === 0) {  
             isPrime = false;
-            break;  // No need to check further divisors
+            break;  
         }
         divisor++;
     }
 
-    // If the number is prime, print it
+    
     if (isPrime) {
-        result = result + "   " + num ;  // Output the prime number
+        result = result + "   " + num ;  
     }
 }
 
@@ -112,16 +111,16 @@ printOut(newLine);
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 
-let row = ""; // Start with an empty string for each row
+let row = ""; 
 
-for (let i = 1; i <= 9; i++) { // Outer loop for rows (1 to 9)
-    row = ""; // Reset the row for each new row in the outer loop
+for (let i = 1; i <= 9; i++) { 
+    row = ""; 
    
-    for (let j = 1; j <= 7; j++) { // Inner loop for columns (1 to 7)
-        row += "K" + j + "R" + i + "\t"; // Add "K" + column number + "R" + row number
+    for (let j = 1; j <= 7; j++) { 
+        row += "K" + j + "R" + i + "\t"; 
     }
     
-    printOut(row); // Print the row after the inner loop finishes
+    printOut(row); 
 }
 
 
@@ -145,7 +144,7 @@ function getGrade(student_score) {
     } else if (percentage >= 0 && percentage < 41) {
         return 'F';
     } else {
-        return 'Invalid percentage'; // In case the input is outside the range 0-100
+        return 'Invalid percentage'; 
     }
 }
 
@@ -171,18 +170,15 @@ printOut(newLine);
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 
+
 function rollDice() {
     return Math.floor(Math.random() * 6) + 1;
 }
-
-// Function to get the count of each die value in a roll
 function getCounts(dice) {
     const counts = {};
     dice.forEach(die => counts[die] = (counts[die] || 0) + 1);
     return counts;
 }
-
-// Function to check each combination using counts
 function checkCombinations(dice, counts) {
     const results = {
         yahtzee: Object.values(counts).includes(5),
@@ -194,7 +190,6 @@ function checkCombinations(dice, counts) {
     };
     return results;
 }
-
 function countRollsToCombination() {
     let rollCount = 0;
     let combinationsFound = {
@@ -204,16 +199,13 @@ function countRollsToCombination() {
         fourOfAKind: false,
         twoOfAKind: false
     };
-
     while (!Object.values(combinationsFound).every(Boolean)) {
         rollCount++;
         let dice = [rollDice(), rollDice(), rollDice(), rollDice(), rollDice()];
-        dice.sort((a, b) => a - b);  // Sort once for full straight check
+        dice.sort((a, b) => a - b); 
 
-        // Get counts for all dice values in this roll
         const counts = getCounts(dice);
 
-        // Check for combinations that haven't been found yet
         const results = checkCombinations(dice, counts);
 
         if (results.yahtzee && !combinationsFound.yahtzee) {
@@ -238,7 +230,5 @@ function countRollsToCombination() {
         }
     }
 }
-
-// Example usage:
 countRollsToCombination();
 printOut(newLine)
