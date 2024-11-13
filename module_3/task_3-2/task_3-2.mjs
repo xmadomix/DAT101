@@ -6,7 +6,6 @@ initPrintOut(document.getElementById("txtOut"));
 
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-    
 
 let line1 = "";
 for (let i = 1; i <= 10; i++) {
@@ -148,87 +147,93 @@ function getGrade(student_score) {
     }
 }
 
+
 function RandomNumber() { 
     return Math.floor(Math.random() * 236) + 1
 }
 
-let student1 = getGrade(RandomNumber()) ;
-let student2 = getGrade(RandomNumber()) ;
-let student3 = getGrade(RandomNumber()) ;
-let student4 = getGrade(RandomNumber()) ;
-let student5 = getGrade(RandomNumber()) ;
+let student = getGrade(RandomNumber()) ;
 
-printOut(student1) ;
-printOut(student2) ;
-printOut(student3) ;
-printOut(student4) ;
-printOut(student5) ;
 
+printOut("the student has achieved an " + student) ;
 
 printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 
-
 function rollDice() {
-    return Math.floor(Math.random() * 6) + 1;
-}
-function getCounts(dice) {
-    const counts = {};
-    dice.forEach(die => counts[die] = (counts[die] || 0) + 1);
-    return counts;
-}
-function checkCombinations(dice, counts) {
-    const results = {
-        yahtzee: Object.values(counts).includes(5),
-        fullStraight: (dice.includes(1) && dice.includes(2) && dice.includes(3) && dice.includes(4) && dice.includes(5)) ||
-                      (dice.includes(2) && dice.includes(3) && dice.includes(4) && dice.includes(5) && dice.includes(6)),
-        threePairs: Object.values(counts).filter(count => count === 2).length === 3,
-        fourOfAKind: Object.values(counts).includes(4),
-        twoOfAKind: Object.values(counts).includes(2)
-    };
-    return results;
-}
-function countRollsToCombination() {
-    let rollCount = 0;
-    let combinationsFound = {
-        yahtzee: false,
-        fullStraight: false,
-        threePairs: false,
-        fourOfAKind: false,
-        twoOfAKind: false
-    };
-    while (!Object.values(combinationsFound).every(Boolean)) {
-        rollCount++;
-        let dice = [rollDice(), rollDice(), rollDice(), rollDice(), rollDice()];
-        dice.sort((a, b) => a - b); 
-
-        const counts = getCounts(dice);
-
-        const results = checkCombinations(dice, counts);
-
-        if (results.yahtzee && !combinationsFound.yahtzee) {
-            printOut(`Yahtzee! It took ${rollCount} rolls.`);
-            combinationsFound.yahtzee = true;
-        }
-        if (results.fullStraight && !combinationsFound.fullStraight) {
-            printOut(`Full Straight! It took ${rollCount} rolls.`);
-            combinationsFound.fullStraight = true;
-        }
-        if (results.threePairs && !combinationsFound.threePairs) {
-            printOut(`Three Pairs! It took ${rollCount} rolls.`);
-            combinationsFound.threePairs = true;
-        }
-        if (results.fourOfAKind && !combinationsFound.fourOfAKind) {
-            printOut(`Four of a Kind (Tower)! It took ${rollCount} rolls.`);
-            combinationsFound.fourOfAKind = true;
-        }
-        if (results.twoOfAKind && !combinationsFound.twoOfAKind) {
-            printOut(`Two of a Kind! It took ${rollCount} rolls.`);
-            combinationsFound.twoOfAKind = true;
-        }
+    let dice = [];
+    for (let i = 0; i < 6; i++) {
+      dice.push(Math.floor(Math.random() * 6) + 1);
     }
-}
-countRollsToCombination();
-printOut(newLine)
+    return dice;
+  }
+  
+
+  function isFullStraight(dice) {
+    const sortedDice = dice.sort((a, b) => a - b);
+    return sortedDice.join('') === '123456';
+  }
+  
+
+  function isThreePairs(dice) {
+    const count = {};
+    for (let num of dice) {
+      count[num] = (count[num] || 0) + 1;
+    }
+    const pairCounts = Object.values(count).filter(val => val === 2);
+    return pairCounts.length === 3;
+  }
+  
+  function isTwoAndFour(dice) {
+    const count = {};
+    for (let num of dice) {
+      count[num] = (count[num] || 0) + 1;
+    }
+    const values = Object.values(count);
+    return values.includes(2) && values.includes(4);
+  }
+  
+
+  function isYahtzee(dice) {
+    return new Set(dice).size === 1;
+  }
+  
+  
+  function simulateGame() {
+    let throws = 0;
+    let fullStraight = false;
+    let threePairs = false;
+    let twoAndFour = false;
+    let yahtzee = false;
+  
+    while (!fullStraight || !threePairs || !twoAndFour || !yahtzee) {
+      throws++;
+      let dice = rollDice();
+      
+      if (!fullStraight && isFullStraight(dice)) {
+        printOut(`Full straight (1-2-3-4-5-6) achieved in throw ${throws}: ${dice}`);
+        fullStraight = true;
+      }
+  
+      if (!threePairs && isThreePairs(dice)) {
+        printOut(`Three pairs achieved in throw ${throws}: ${dice}`);
+        threePairs = true;
+      }
+  
+      if (!twoAndFour && isTwoAndFour(dice)) {
+        printOut(`Two of a kind and four of a kind (tower) achieved in throw ${throws}: ${dice}`);
+        twoAndFour = true;
+      }
+  
+      if (!yahtzee && isYahtzee(dice)) {
+        printOut(`Yahtzee (all the same) achieved in throw ${throws}: ${dice}`);
+        yahtzee = true;
+      }
+    }
+  
+  }
+
+  simulateGame();
+  printOut(newLine) ;

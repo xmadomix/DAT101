@@ -4,6 +4,18 @@ initPrintOut(document.getElementById("txtOut"));
 
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+
+function myFunction() {
+    // code to execute goes here
+}
+
+function sayHello() {
+    console.log("Friday, October 18, 2019");
+}
+
+printOut(sayHello()); // This will print "Hello, world!" to the console
+
+
 printOut("Replace this with you answer!");
 printOut(newLine);
 
