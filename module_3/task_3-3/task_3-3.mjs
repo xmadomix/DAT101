@@ -6,11 +6,10 @@ printOut("--- Part 1 -----------------------------------------------------------
 /* Put your code below here!*/
 
 function myFunction() {
-    // code to execute goes here
 }
 
 function sayHello() {
-    console.log("Friday, October 18, 2019");
+    printOut("Friday, October 18, 2019") ;
 }
 
 printOut(sayHello()); // This will print "Hello, world!" to the console

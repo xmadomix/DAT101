@@ -10,8 +10,37 @@
       <span id="txtOut" style="white-space: nowrap"></span>
     </div>
     <ol>
-      <li>[Write the question here, and copy this for more questions]</li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+      <li>[What is an array? A short and concise answer is expected here!]</li>
+      <p>[An array is a special variable that can hold more than one value, unlike "let" and "const"]</p>
+      <li>[What does it mean to "hardcode" when we talk about programming? (In English, it's called "hard
+        coding", "hard-coding", or "hardcoding")]</li>
+        <p>[It just means that you're embedding fixed values/ configurations directly into the source code. Because the changes are made directly into the source code, its harder to maintain, and its therefore best to avaoid this method. it is acceptable to use if you want never-changing values or small scripts.]</p>
+        <li>[Explain in plain text what happens in task 3, and how we can traverse (iterate) the array when we
+          (humans) don't "know" how long the array is]</li>
+          <p>[when we dont know how long the array is, we can traverse it by using a loop that an adapt to the array's size. In task 3, we use the array length property, called "length" that tells us how many elements are in the array and we can determine how far the loop should go. now we put the "for" loop to this array to iterate, as this causes the loop to go through each element from start to end of the array. in short the loop will continue until it reaches the end of the array.]</p>
+          <li>[Why is it beneficial to store instances of a class in arrays, as in task 4?]</li>
+          <p>[This is so its more easier for us to organize mulitple objects in a structual and effient way. in Task four, we can manage between the girl names, and afterwards code in comands we can later test  in the program.]</p>
+          <li>[Try your best to explain the EWeekDays object from task 7. How do we use the "value" attribute, for
+            example? In what way do "WeekDay", "Workdays", and "Weekends" differ from each other? If we
+            wanted to create a new element "WorkoutDays", which would contain "Monday", "Wednesday", and
+            "Thursday", how would it ideally look? (I will choose the best answer to this task and reward it with
+            pizza in the cafeteria right after New Year. Remember to mark in your submission if you want to
+            participate in the competition!)]</li>
+          <p>[we use the value atribute in two ways, in an HTML "input", the value is the user input, however in programming value is also the assigned value of a property/ variable. we use this to create value for the EWeekDays object in task 7. we have Weekday, Workdays and Weekends, and to show how they differ, we define different arrays for them. Weekday contains all 7 days of the week, but workday contains only 5 of the days (five start days) as its a subset of Weekday. Weekends is a subset og Weekday aswell, but only contains two of the days (two end days). these arrays differ based on the days that has been included and the context they have been put in. If we were to create "workoutdays" we have to define another array, and its the same with the other arrays we have with he other weekday subsets. for workoutdays, we can add whichever day we wish to show (monday, wednesday, thursday) which day is workoutdays. overall with everything, the code will look like a little list with a view of the different days. an example is how they look like a cafe menu with the ingridients.
+          <p>[weekday: monday, tuesday, wednesday, thursday, friday, saturday, sunday]</p>
+          <p>[Workdays: monday, tuesday, wednesday, thrusday, friday]</p>
+          <p>[Weekends: saturday, sunday]</p>
+          <p>[workoutdays: monday, wednesday, thursday]</p>
+          <p>[as the owner of the cafe, you can accses, create and change the ingridients for the different products on your own, depending on the need.]</p>
+          <li>[In task 8, we will use a "callback" routine when sorting. Explain how such a "callback" routine works.]</li>
+          <p>[A callback routine in javascript is a function that passes as an argument to another function, to later then be executed during the execution of that function. while sorting, the "callback" routine is used to define how two elementsw in an array whould be compared. in task 8 we use this to sort out the different values in the "random values" in two ways : ascending and descending order. with this the callback routine them compares the elements in the array we created, that allows to later sort the elements in a new array.]</p>
+          <li>[What happens in the sorting routines you have created? Try to explain how the array can figure out
+            if an element should come before or after another. The best way to answer this is to actually print
+            both parameters each time the sorting routine runs.]</li>
+          <p>[you use the .sort(...) method to sorting. this method uses a callback function to decide the order of the elements in the array. the purpose of this method is that the callback determines if an element should come before, after or stay in the same position relative to another element. in task 8 and as recomended (and from our mentor tihi) because the callback will determine the said positions, its best to print with both parameters to see how it runs and to see if the method worked (depending on what type of sorting you want but its good to see both) ]</p>
+          <li>[In task 10, we will create an array with rows and columns. Explain what the first element of the array
+            contains.]</li>
+          <p>[ the code contains outer loop (rows), Inner loop (columns), pushing rows to "mytable", and the structure of "mytable". these four are the parts of the code that builds up the array with rows and columns, but the first element of the array "mytable", contains another array that wll represent the first row of the table. the array that was created for task 10, contains 9 elements, which is each being a string that specifies rows and columns in the format "<row>, <columns>"]</p>
     </ol>
     <script type="module" src="./task_4-2.mjs" defer></script>
   </body>
