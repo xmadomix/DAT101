@@ -15,7 +15,7 @@ const SpriteInfoList = {
   sonic9: { x: 0, y: 960, width: 102, height: 130, count: 4}
 }
 let spIndex = 0;
-let spi = SpriteInfoList.sonic2;
+let spi = SpriteInfoList.sonic8;
 
 const cvs = document.getElementById("cvs");
 const spriteCanvas = new libSprite.TSpriteCanvas(cvs);
