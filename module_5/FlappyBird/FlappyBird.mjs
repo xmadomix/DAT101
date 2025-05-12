@@ -51,12 +51,16 @@ export const GameProps = {
 
 //--------------- Functions ----------------------------------------------//
 
-function playSound(aSound) {
+export function playSound(aSound) {
   if (!GameProps.soundMuted) {
     aSound.play();
   } else {
     aSound.pause();
   }
+}
+//function to stop and reset the sound
+export function stopResetSound(aSound) {
+  aSound.stop();
 }
 
 function loadGame() {
@@ -76,6 +80,9 @@ function loadGame() {
 
   //Load sounds
   GameProps.sounds.running = new libSound.TSoundFile("./Media/running.mp3");
+  GameProps.sounds.flap = new libSound.TSoundFile("./Media/flap.mp3");
+  GameProps.sounds.food = new libSound.TSoundFile("./Media/food.mp3");
+  GameProps.sounds.hitObstacle = new libSound.TSoundFile("./Media/hitObstacle.mp3");
 
   requestAnimationFrame(drawGame);
   setInterval(animateGame, 10);
@@ -110,6 +117,8 @@ function animateGame() {
   switch (GameProps.status) {
     case EGameStatus.playing:
       if (GameProps.hero.isDead) {
+        stopResetSound(GameProps.sounds.hitObstacle);
+        playSound(GameProps.sounds.hitObstacle);
         GameProps.hero.animateSpeed = 0;
         GameProps.hero.update();
         return;
@@ -150,7 +159,10 @@ function animateGame() {
         }
       }
       if (delBaitIndex >= 0) {
+        stopResetSound(GameProps.sounds.food);
+        playSound(GameProps.sounds.food);
         GameProps.baits.splice(delBaitIndex, 1);
+
         GameProps.menu.incScore(10);
       }
       break;
@@ -192,7 +204,7 @@ export function startGame() {
   spawnObstacle();
   spawnBait();
   //Play the running sound
-  GameProps.sounds.running.play();
+  playSound(GameProps.sounds.running);
 }
 
 //--------------- Event Handlers -----------------------------------------//
@@ -207,12 +219,24 @@ function setSoundOnOff() {
   }
 } // end of setSoundOnOff
 
-function setDayNight() {
+export function setDayNight() {
   if (rbDayNight[0].checked) {
+    GameProps.background.index = 0;
+    
+    GameProps.obstacles.forEach(obstacle => {
+      obstacle.updateIndex(3, 2); 
+    });
+
     GameProps.dayTime = true;
     console.log("Day time");
   } else {
     GameProps.dayTime = false;
+    GameProps.background.index = 1;
+    
+    GameProps.obstacles.forEach(obstacle => {
+      obstacle.updateIndex(1, 0);
+    });
+    
     console.log("Night time");
   }
 } // end of setDayNight
@@ -222,6 +246,8 @@ function onKeyDown(aEvent) {
     case "Space":
       if (!GameProps.hero.isDead) {
         GameProps.hero.flap();
+        stopResetSound(GameProps.sounds.flap);
+        playSound(GameProps.sounds.flap);
       }
       break;
   }
@@ -235,3 +261,4 @@ rbDayNight[1].addEventListener("change", setDayNight);
 // Load the sprite sheet
 spcvs.loadSpriteSheet("./Media/FlappyBirdSprites.png", loadGame);
 document.addEventListener("keydown", onKeyDown);
+//

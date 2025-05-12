@@ -2,7 +2,7 @@
 import lib2d from "../../common/libs/lib2d.mjs";
 import libSound from "../../common/libs/libSound.mjs";
 import libSprite from "../../common/libs/libSprite.mjs";
-import { SpriteInfoList, GameProps, EGameStatus, startGame } from "./FlappyBird.mjs";
+import { SpriteInfoList, GameProps, EGameStatus, startGame, playSound, stopResetSound } from "./FlappyBird.mjs";
 
 /*
 Dere skal flytte FlappyBird Spriten til en fornuftig plass på skjermen.
@@ -60,8 +60,10 @@ export class TMenu {
     this.#posScore = new lib2d.TPosition(383, 181);
     this.#posBestScore = new lib2d.TPosition(383, 225);
     this.#posPlayScore = new lib2d.TPosition(75, 50);
+    GameProps.sounds.countDown = new libSound.TSoundFile("./Media/countDown.mp3");
+    GameProps.sounds.gameOver = new libSound.TSoundFile("./Media/gameOver.mp3");
+    
   }
-
   draw() {
     switch (GameProps.status) {
       case EGameStatus.idle:
@@ -81,6 +83,7 @@ export class TMenu {
         this.#spcvs.drawText(GameProps.score.toString(), this.#posScore);
         this.#spcvs.drawText(GameProps.bestScore.toString(), this.#posBestScore);
         this.#spButtonPlay.draw();
+        stopResetSound(GameProps.sounds.countDown);
         break;
       case EGameStatus.playing:
         this.#spcvs.drawText(GameProps.score.toString(), this.#posPlayScore);
@@ -134,6 +137,7 @@ export class TMenu {
   #onClick = () => {
     if (this.#activeSprite === this.#spButtonPlay) {
       GameProps.status = EGameStatus.getReady;
+      playSound(GameProps.sounds.countDown);
       this.#spcvs.style.cursor = "default";
       setTimeout(this.#onCountDown, 1000);
     }
@@ -143,8 +147,10 @@ export class TMenu {
     if (this.#spNumber.index > 1) {
       this.#spNumber.index--;
       setTimeout(this.#onCountDown, 1000);
+      
     } else {
       startGame();
     }
   };
 } // End of TMenu class
+//
